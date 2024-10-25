@@ -1,4 +1,4 @@
-name: Deploy to Render
+name: Build and Push Docker Image
 
 on:
   push:
@@ -9,7 +9,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      deployments: write
+      contents: write 
+      packages: write
 
     steps:
       - name: Check out code
@@ -81,23 +82,24 @@ jobs:
             "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gmail-589%40formapp-386422.iam.gserviceaccount.com",
             "universe_domain": "googleapis.com"
           }
-          EOF
-
-       
+          EOF  
 
       - name: Install dependencies
         run: npm install
 
       - name: Build application
-        run: npm run build  # Certifique-se de que existe um script de build no seu package.json
+        run: npm run build
 
-      - name: Deploy to Render
-        uses: JorgeLNJunior/render-deploy@v1.4.4
+      - name: Build Docker Image
+        run: |
+          docker build -t liperasys/lipera-back:latest .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          clear_cache: true
-          wait_deploy: true
-          github_deployment: true
-          deployment_environment: 'production'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Push Docker Image
+        run: |
+          docker push liperasys/lipera-back:latest:latest
