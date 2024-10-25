@@ -1,0 +1,9 @@
+*.pdf
+**/*.pdf
+*.pdf
+node_modules/
+dist/
+coverage/
+tests/
+.env
+./src/credentials/*
