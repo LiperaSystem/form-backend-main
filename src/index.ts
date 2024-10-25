@@ -3,6 +3,7 @@ import { router } from './router';
 import * as cors from 'cors';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+import http from 'http';
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ mongoose
     app.use(cors(corsOptions));
     app.use(express.json());
     app.use(router);
+    app.use(express.static("public")) 
 
     app.listen(port, () => {
       console.log('Server is listening on port 3000');
