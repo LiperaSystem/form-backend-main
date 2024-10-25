@@ -102,4 +102,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push liperasys/lipera-back:latest:latest
+          docker push liperasys/lipera-back:latest
