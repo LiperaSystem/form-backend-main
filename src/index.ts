@@ -3,7 +3,6 @@ import { router } from './router';
 import * as cors from 'cors';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import http from 'http';
 
 dotenv.config();
 
