@@ -1,5 +1,5 @@
 export default function DateBR() {
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -10,6 +10,6 @@ export default function DateBR() {
 
   const data = new Date().toLocaleString('pt-BR', options);
 
-  console.log(data)
+  console.log(data);
   return data;
 }
