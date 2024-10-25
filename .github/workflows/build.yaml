@@ -93,5 +93,5 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g vercel
-          vercel --prod --token=$VERCEL_TOKEN
+          npm install -g vercel@latest
+          vercel pull --yes --environment=prod --token=${{ secrets.VERCEL_TOKEN }}
