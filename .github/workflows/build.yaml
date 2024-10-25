@@ -20,8 +20,8 @@ jobs:
           echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
           echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
 
-    #   - name: Create credentials folder
-    #     run: mkdir -p src/credentials
+      - name: Create credentials folder
+        run: mkdir -p src/credentials
 
       - name: Create credentials.json
         run: |
